@@ -4,6 +4,7 @@ export type Property = {
   id: string
   slug: string
   name: string
+  ownerCompanyName?: string | null
   location: string
   price: number
   listing: PropertyListingType
@@ -20,43 +21,7 @@ export type Property = {
 }
 
 export const sampleProperties: Property[] = [
-  {
-   id: 'oak-and-olive',
-    slug: 'oak-and-olive',
-    name: 'The Oak & Olive',
-    location: 'Atlanta, Georgia',
-    price: 489000,
-    listing: 'buy',
-    beds: 4,
-    baths: 3,
-    area: 2380,
-    style: 'Modern open-concept living with a chef-ready kitchen',
-    visual: 'from-[#b8a27c] via-[#75876d] to-[#394f3d]',
-    description: 'Coffered ceilings and designer pendant lighting set the tone in this light-filled, open-plan home. A granite island with seating anchors the kitchen, flowing into a relaxed living area made for hosting. The bedroom is a quiet retreat with a dark brick accent wall. Stylish, low-maintenance, and move-in ready. This illustrative listing gives a sense of the kind of home you could feature.',
-    features: [
-      'Open-concept layout',
-      'Granite kitchen island with seating',
-      'Black stainless appliances',
-      'Coffered ceilings',
-      'Hex tile backsplash',
-      'In-unit laundry',
-      'Exposed brick accent wall',
-      'Wood-look flooring',
-    ],
-    yearBuilt: 2018,
-    lotSize: '0.42 acres',
-    imageUrls: [
-      '/images/properties_images/featapart.webp',
-      '/images/properties_images/featapart1.webp',
-      '/images/properties_images/featapart2.webp',
-      '/images/properties_images/featapart3.webp',
-      '/images/properties_images/featapart4.webp',
-      '/images/properties_images/featapart5.webp',
-      '/images/properties_images/featapart6.webp',
-      '/images/properties_images/featapart7.webp',
-      '/images/properties_images/featapart8.webp',
-    ],
-  },
+
   {
     id: 'maple-house',
     slug: 'maple-house',

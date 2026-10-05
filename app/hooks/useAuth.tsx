@@ -7,7 +7,7 @@ import { getSupabaseBrowserClient } from '../lib/supabase/client'
 type Profile = {
 first_name: string | null
 last_name: string | null
-role: string | null
+role: 'user' | 'owner' | 'admin' | null
 }
 
 export function useAuth() {
@@ -81,5 +81,8 @@ subscription.unsubscribe()
 }
 }, [supabase])
 
-return { supabase, user, profile, loading, error, isAdmin: profile?.role === 'admin' }
+const isAdmin = profile?.role === 'admin'
+const canManageProperties = isAdmin || profile?.role === 'owner'
+
+return { supabase, user, profile, loading, error, isAdmin, canManageProperties }
 }

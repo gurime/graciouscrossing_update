@@ -1,7 +1,9 @@
   import Link from 'next/link'
+  import { connection } from 'next/server'
   import { ArrowRight, BadgeCheck, Building2, KeyRound, MapPin, Search, ShieldCheck } from 'lucide-react'
   import PropertyCard from './components/PropertyCard'
   import { sampleProperties } from './lib/properties'
+  import { getPublishedProperties } from './lib/properties-server'
 
   const services = [
   {
@@ -27,7 +29,11 @@
   },
   ]
 
-  export default function Dashboard() {
+  export default async function Dashboard() {
+  await connection()
+  const publishedProperties = await getPublishedProperties()
+  const featuredProperties = [...publishedProperties, ...sampleProperties].slice(0, 3)
+
   return (
   <main>
   <section className="relative isolate overflow-hidden bg-[#1e362b] text-white">
@@ -35,7 +41,7 @@
   aria-hidden="true"
   className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_78%_20%,rgba(177,147,91,0.38),transparent_34%),linear-gradient(120deg,#1e362b_10%,#31523f_60%,#243d31)]"
   />
-  <div className="mx-auto grid min-h-[590px] max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_0.82fr] lg:py-24">
+  <div className="mx-auto grid min-h-147.5 max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_0.82fr] lg:py-24">
   <div className="max-w-2xl">
   <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-[#dfc99d]">
   A more considered way home
@@ -81,15 +87,15 @@
   </button>
   </form>
   <p className="mt-3 text-xs text-white/60">
-  Search results currently use sample listings while the property database is being connected.
+  Search owner-submitted homes and illustrative examples.
   </p>
   </div>
 
-  <div className="relative hidden min-h-[390px] items-end justify-center lg:flex">
+  <div className="relative hidden min-h-97.5 items-end justify-center lg:flex">
   <div className="absolute right-0 top-4 h-72 w-72 rounded-full border border-white/15" />
   <div className="absolute right-10 top-14 h-52 w-52 rounded-full border border-white/15" />
-  <div className="relative w-full max-w-[450px] rounded-t-[48%] border border-white/15 bg-gradient-to-b from-[#79917a] via-[#526f5b] to-[#243e31] px-8 pb-8 pt-28 shadow-2xl">
-  <div className="mx-auto flex h-56 max-w-xs items-end justify-center overflow-hidden rounded-t-[48%] border-x border-t border-white/25 bg-gradient-to-b from-[#d9c69c] via-[#a68d65] to-[#596e59]">
+  <div className="relative w-full max-w-112.5 rounded-t-[48%] border border-white/15 bg-linear-to-b from-[#79917a] via-[#526f5b] to-[#243e31] px-8 pb-8 pt-28 shadow-2xl">
+  <div className="mx-auto flex h-56 max-w-xs items-end justify-center overflow-hidden rounded-t-[48%] border-x border-t border-white/25 bg-linear-to-b from-[#d9c69c] via-[#a68d65] to-[#596e59]">
   <div className="relative flex h-40 w-64 items-end justify-center bg-[#f1e8d5] shadow-xl">
   <div className="absolute -top-11 h-14 w-72 -skew-x-12 bg-[#384a3d]" />
   <div className="mb-0 h-28 w-20 border-4 border-[#765e43] bg-[#b7c3b1]" />
@@ -123,12 +129,12 @@
   </Link>
   </div>
   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-  {sampleProperties.slice(0, 3).map((property) => (
+  {featuredProperties.map((property) => (
   <PropertyCard key={property.id} property={property} />
   ))}
   </div>
   <p className="mt-5 text-xs text-stone-500">
-  These are illustrative sample listings, not active properties.
+  Listings marked as illustrative are examples, not active properties.
   </p>
   </section>
 

@@ -17,10 +17,11 @@ const links = [
 ]
 
 export default function Navbar() {
-const { supabase, user, profile, loading, isAdmin } = useAuth()
+const { supabase, user, profile, loading, canManageProperties, isAdmin } = useAuth()
 const pathname = usePathname()
 const router = useRouter()
 const [open, setOpen] = useState(false)
+const accountName = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ') || 'My account'
 
 const handleLogout = async () => {
 await supabase.auth.signOut()
@@ -36,7 +37,7 @@ pathname === href ? 'text-[#b08a3e]' : 'text-neutral-700'
 
 return (
 <header className="sticky top-0 z-50 bg-white shadow-sm">
-{isAdmin && <AdminBar />}
+{canManageProperties && <AdminBar isAdmin={isAdmin} />}
 
 <nav className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 px-4 py-2">
 <Link href="/" aria-label="Gracious Crossing home">
@@ -46,7 +47,7 @@ alt="Gracious Crossing Homes & Properties"
 width={160}
 height={160}
 priority
-className="h-12 w-auto"
+className="h-32 w-auto"
 />
 </Link>
 
@@ -62,9 +63,9 @@ className="h-12 w-auto"
 <div className="hidden items-center gap-3 lg:flex">
 {loading ? null : user ? (
 <>
-<span className="text-sm text-neutral-700">
-{profile?.first_name ?? 'Account'}
-</span>
+<Link href="/account" className="text-sm text-neutral-700 hover:text-[#b08a3e]">
+{accountName}
+</Link>
 <button
 onClick={handleLogout}
 className="rounded-md border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-100"
@@ -78,7 +79,7 @@ Log out
 Log in
 </Link>
 <Link
-href="/register"
+href="/login?tab=signup"
 className="rounded-md bg-[#b08a3e] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#96742f]"
 >
 Register
@@ -115,11 +116,16 @@ aria-controls="mobile-navigation"
 ))}
 <li className="mt-2 border-t pt-3">
 {user ? (
-<button onClick={handleLogout} className="text-sm text-neutral-700">Log out</button>
+<>
+<Link href="/account" onClick={() => setOpen(false)} className="block py-2 text-sm text-neutral-700">My account</Link>
+{canManageProperties && <Link href="/admin" onClick={() => setOpen(false)} className="block py-2 text-sm text-neutral-700">My listings</Link>}
+{isAdmin && <Link href="/admin/owner-requests" onClick={() => setOpen(false)} className="block py-2 text-sm text-neutral-700">Owner requests</Link>}
+<button onClick={handleLogout} className="mt-2 text-sm text-neutral-700">Log out</button>
+</>
 ) : (
 <div className="flex gap-4 text-sm">
 <Link href="/login" onClick={() => setOpen(false)}>Log in</Link>
-<Link href="/register" onClick={() => setOpen(false)}>Register</Link>
+<Link href="/login?tab=signup" onClick={() => setOpen(false)}>Register</Link>
 </div>
 )}
 </li>
