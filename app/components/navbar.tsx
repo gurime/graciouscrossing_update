@@ -47,7 +47,7 @@ alt="Gracious Crossing Homes & Properties"
 width={160}
 height={160}
 priority
-className="h-32 w-auto"
+className="max-h-52 w-auto"
 />
 </Link>
 
