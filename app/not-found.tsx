@@ -10,9 +10,7 @@ const router = useRouter()
 return (
 <main className="flex flex-1 items-center justify-center bg-[#faf9f6] px-5 py-20 sm:px-8">
 <section className="w-full max-w-2xl text-center">
-<p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#806b44]">
-Gracious Crossing
-</p>
+
 <p
 aria-hidden="true"
 className="mt-5 font-serif text-8xl leading-none text-[#315b48] sm:text-9xl"

@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Compass, Handshake, HeartHandshake } from 'lucide-react'
+import Navbar from '../components/navbar'
+import SiteFooter from '../components/SiteFooter'
 
 const values = [
   {
@@ -21,6 +23,8 @@ const values = [
 
 export default function AboutPage() {
   return (
+    <>
+    <Navbar/>
     <main className="flex-1">
       <section className="bg-[#1e362b] text-white">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
@@ -66,5 +70,7 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
+    <SiteFooter/>
+    </>
   )
 }

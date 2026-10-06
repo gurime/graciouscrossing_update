@@ -2,6 +2,8 @@
 import Link from 'next/link'
 import PropertyForm from '../../../components/PropertyForm'
 import GoBack from '@/app/components/GoBack'
+import Navbar from '@/app/components/navbar'
+import SiteFooter from '@/app/components/SiteFooter'
 
 type EditPropertyPageProps = {
 params: Promise<{ id: string }>
@@ -12,6 +14,8 @@ const { id } = await params
 
 
 return (
+    <>
+    <Navbar/>
 <main className="flex-1 bg-[#f7f6f1]">
 <div className="mx-auto max-w-4xl px-5 py-10 sm:px-8">
 <div className="flex items-center justify-between">
@@ -31,5 +35,7 @@ Cancel
 </div>
 </div>
 </main>
+<SiteFooter/>
+</>
 )
 }

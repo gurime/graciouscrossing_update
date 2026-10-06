@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { useAuth } from '../hooks/useAuth'
+import Navbar from '../components/navbar'
+import SiteFooter from '../components/SiteFooter'
 
 type OwnerAccessRequest = {
 id: string
@@ -140,6 +142,9 @@ const roleLabel = profile?.role === 'admin'
 : 'Regular account'
 
 return (
+    <>
+    <Navbar/>
+
 <main className="flex-1 bg-[#f7f6f1]">
 <section className="bg-[#1e362b] text-white">
 <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
@@ -236,6 +241,8 @@ className="inline-flex min-h-11 items-center rounded bg-[#315b48] px-5 text-sm f
 )}
 </div>
 </section>
-</main>
+</main>  
+<SiteFooter/>
+  </>
 )
 }

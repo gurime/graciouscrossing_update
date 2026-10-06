@@ -4,6 +4,8 @@
   import PropertyCard from './components/PropertyCard'
   import { sampleProperties } from './lib/properties'
   import { getPublishedProperties } from './lib/properties-server'
+import Navbar from './components/navbar'
+import SiteFooter from './components/SiteFooter'
 
   const services = [
   {
@@ -35,6 +37,8 @@
   const featuredProperties = [...publishedProperties, ...sampleProperties].slice(0, 3)
 
   return (
+    <>
+    <Navbar/>
   <main>
   <section className="relative isolate overflow-hidden bg-[#1e362b] text-white">
   <div
@@ -171,5 +175,7 @@
   </div>
   </section>
   </main>
+  <SiteFooter/>
+  </>
   )
   }

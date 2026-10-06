@@ -14,7 +14,9 @@ export default function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
         <div>
           <Link href="/" aria-label="Gracious Crossing home" className="inline-flex rounded bg-white p-2">
-            <Image src="/images/gracious_crossinggold.png" alt="Gracious Crossing" width={160} height={64} className="h-12 w-auto object-contain" />
+            <Image 
+            loading="eager"
+            src="/images/gracious_crossing_logo_transparent.png" alt="Gracious Crossing" width={160} height={64} className="h-12 w-auto object-contain" />
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-6 text-white/65">
             Thoughtful real estate guidance for finding, selling, and settling into your next chapter.

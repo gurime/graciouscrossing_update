@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../../hooks/useAuth'
+import Navbar from '@/app/components/navbar'
+import SiteFooter from '@/app/components/SiteFooter'
 
 type ExistingProperty = {
 id: string
@@ -205,6 +207,8 @@ return <p role="status" className="py-10 text-center text-sm text-stone-600">Loa
 const currentPhotos = property?.image_urls.filter((url) => !removedPhotos.includes(url)) ?? []
 
 return (
+    <>
+
 <form onSubmit={handleSubmit} className="space-y-8">
 {error && <p role="alert" className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-800">{error}</p>}
 
@@ -327,6 +331,7 @@ disabled={saving}
 {saving ? 'Saving…' : propertyId ? 'Save changes' : 'Create listing'}
 </button>
 </div>
-</form>
+</form>  
+  </>
 )
 }

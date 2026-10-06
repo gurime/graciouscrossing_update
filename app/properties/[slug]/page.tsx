@@ -8,6 +8,8 @@ import PropertyPhoto from '../../components/PropertyPhoto'
 import SharePropertyButton from '../../components/SharePropertyButton'
 import { getPropertyBySlug, sampleProperties } from '../../lib/properties'
 import { getPublishedProperties, getPublishedPropertyBySlug } from '../../lib/properties-server'
+import Navbar from '@/app/components/navbar'
+import SiteFooter from '@/app/components/SiteFooter'
 
 type PropertyPageProps = {
 params: Promise<{ slug: string }>
@@ -47,8 +49,16 @@ const publishedProperties = await getPublishedProperties()
 const similarProperties = [...publishedProperties, ...sampleProperties]
 .filter((item) => item.slug !== property.slug && item.listing === property.listing)
 .slice(0, 3)
+function monthlyPayment(price: number, downPct = 0.2, rate = 0.065, years = 30) {
+const principal = price * (1 - downPct)
+const r = rate / 12
+const n = years * 12
+return (principal * r) / (1 - Math.pow(1 + r, -n))
+}
 
 return (
+<>
+<Navbar/>
 <main className="flex-1">
 <div className="mx-auto max-w-7xl px-5 pt-6 sm:px-8">
 <Link href="/properties" className="inline-flex items-center gap-2 text-sm font-medium text-stone-600 hover:text-[#315b48]">
@@ -192,20 +202,42 @@ sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
 <aside className="h-fit rounded-md border border-stone-200 bg-white p-6 shadow-sm lg:sticky lg:top-24">
 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#806b44]">Interested in this home?</p>
 <p className="mt-3 font-serif text-2xl text-[#24372c]">Let&apos;s talk through the details.</p>
-<p className="mt-3 text-sm leading-6 text-stone-600">
-{isSampleListing
-? 'This is an illustrative sample listing, not a verified available property. Reach out to discuss your home search.'
-: 'Contact Gracious Crossing to ask about this property and its availability.'}
+
+<div className="mt-5 border-t border-stone-100 pt-5">
+<p className="text-2xl font-semibold text-red-600">
+{currency.format(property.price)}
+{property.listing === 'rent' && <span className="text-sm font-normal text-stone-500"> / month</span>}
 </p>
+{property.listing === 'buy' && (
+<p className="mt-1 text-xs text-stone-500">
+Est. {currency.format(monthlyPayment(property.price))}/mo · 20% down, 30-yr fixed at 6.5%
+</p>
+)}
+{property.ownerCompanyName && (
+<p className="mt-3 text-sm text-stone-600">
+Listed by <span className="font-medium text-[#315b48]">{property.ownerCompanyName}</span>
+</p>
+)}
+</div>
+
 <Link
 href={`/contact?property=${encodeURIComponent(property.slug)}`}
 className="mt-6 flex min-h-12 items-center justify-center rounded bg-[#315b48] px-5 text-sm font-semibold text-white hover:bg-[#244636] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#315b48]"
 >
-Contact Gracious Crossing
+{property.ownerCompanyName ? `Contact ${property.ownerCompanyName}` : 'Contact Gracious Crossing'}
 </Link>
-<p className="mt-4 text-center text-xs leading-5 text-stone-500">
-Business contact details and inquiry delivery are not configured yet.
+
+<p className="mt-3 text-center text-xs leading-5 text-stone-500">
+{property.listing === 'rent'
+? 'Ask about availability, lease terms, or schedule a viewing.'
+: 'Ask a question or request a showing. It only takes a minute.'}
 </p>
+
+{isSampleListing && (
+<p className="mt-4 rounded bg-[#f4f1e8] p-3 text-xs leading-5 text-stone-600">
+This is an illustrative sample listing, not a verified available property.
+</p>
+)}
 </aside>
 </section>
 
@@ -220,5 +252,7 @@ Business contact details and inquiry delivery are not configured yet.
 </section>
 )}
 </main>
+<SiteFooter/>
+</>
 )
 }

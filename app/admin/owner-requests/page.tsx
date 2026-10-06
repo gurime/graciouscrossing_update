@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import Navbar from '@/app/components/navbar'
+import SiteFooter from '@/app/components/SiteFooter'
 
 type OwnerAccessRequest = {
 id: string
@@ -99,6 +101,8 @@ return (
 }
 
 return (
+    <>
+    <Navbar/>
 <main className="flex-1 bg-[#f7f6f1]">
 <section className="bg-[#1e362b] text-white">
 <div className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
@@ -152,5 +156,7 @@ Reject
 )}
 </section>
 </main>
+<SiteFooter/>
+</>
 )
 }

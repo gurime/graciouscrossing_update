@@ -3,6 +3,8 @@ import { connection } from 'next/server'
 import PropertyCard from '../components/PropertyCard'
 import { sampleProperties } from '../lib/properties'
 import { getPublishedProperties } from '../lib/properties-server'
+import Navbar from '../components/navbar'
+import SiteFooter from '../components/SiteFooter'
 
 type PropertiesPageProps = {
 searchParams: Promise<{
@@ -30,6 +32,10 @@ return matchesLocation && matchesListing
 })
 
 return (
+    <>
+    
+    <Navbar/>
+    
 <main className="flex-1">
 <section className="bg-[#e9e5da]">
 <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
@@ -97,5 +103,7 @@ Show all properties
 <p className="mt-6 text-xs text-stone-500">Listings marked as sample content are illustrative and do not represent active properties or market pricing.</p>
 </section>
 </main>
+<SiteFooter/>
+</>
 )
 }

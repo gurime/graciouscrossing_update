@@ -42,12 +42,13 @@ return (
 <nav className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 px-4 py-2">
 <Link href="/" aria-label="Gracious Crossing home">
 <Image
-src="/images/gracious_crossinggold.png"
+loading="eager"
+src="/images/gracious_crossing_logo_transparent.png"
 alt="Gracious Crossing Homes & Properties"
 width={160}
 height={160}
 priority
-className="max-h-52 w-auto"
+className="max-h-28 w-auto"
 />
 </Link>
 

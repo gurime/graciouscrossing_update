@@ -1,6 +1,8 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import Navbar from './navbar';
+import SiteFooter from './SiteFooter';
 const currency = new Intl.NumberFormat('en-US', {
 style: 'currency',
 currency: 'USD',
@@ -56,6 +58,8 @@ return { principalAndInterest, monthlyTax, total }
 }, [annualTax, downPayment, homePrice, interestRate, loanTerm, monthlyInsurance])
 
 return (
+    <>
+    <Navbar/>
 <section className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:py-16">
 <div className="rounded-md border border-stone-200 bg-white p-6 shadow-sm sm:p-8">
 <h2 className="font-serif text-2xl text-[#24372c]">Adjust your assumptions</h2>
@@ -83,5 +87,7 @@ This estimate is for general planning only. It excludes mortgage insurance, HOA 
 </p>
 </aside>
 </section>
+<SiteFooter/>
+</>
 )
 }

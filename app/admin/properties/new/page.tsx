@@ -1,8 +1,12 @@
 import Link from 'next/link'
 import PropertyForm from '../../components/PropertyForm'
+import Navbar from '@/app/components/navbar'
+import SiteFooter from '@/app/components/SiteFooter'
 
 export default function NewPropertyPage() {
   return (
+    <>
+    <Navbar/>
     <main className="flex-1 bg-[#f7f6f1]">
       <div className="mx-auto max-w-4xl px-5 py-10 sm:px-8">
         <Link href="/admin" className="text-sm font-medium text-[#315b48] hover:underline">← Back to my listings</Link>
@@ -14,5 +18,7 @@ export default function NewPropertyPage() {
         </div>
       </div>
     </main>
+    <SiteFooter/>
+    </>
   )
 }

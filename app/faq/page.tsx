@@ -1,3 +1,6 @@
+import Navbar from "../components/navbar"
+import SiteFooter from "../components/SiteFooter"
+
 const questions = [
   {
     question: 'How do I start looking for a home?',
@@ -23,6 +26,8 @@ const questions = [
 
 export default function FaqPage() {
   return (
+    <>
+    <Navbar/>
     <main className="flex-1">
       <section className="bg-[#e9e5da]">
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
@@ -47,5 +52,7 @@ export default function FaqPage() {
         </div>
       </section>
     </main>
+    <SiteFooter/>
+    </>
   )
 }
